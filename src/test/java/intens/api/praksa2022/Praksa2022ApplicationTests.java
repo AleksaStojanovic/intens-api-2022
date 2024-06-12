@@ -8,6 +8,8 @@ class Praksa2022ApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
+	
 	}
 
 }
