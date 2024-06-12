@@ -9,6 +9,7 @@ public class DemoController {
     @RequestMapping("/")
     public ResponseEntity<String> getRootDemo() {
 
-        return ResponseEntity.ok().body("Intens Praksa 2022! hello world");
+        return ResponseEntity.ok().body("Intens Praksa 2022! Hello World 2");
+     
     }
 }
