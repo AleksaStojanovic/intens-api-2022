@@ -11,16 +11,15 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  
+        uses: actions/checkout@v3
 
       - name: Set up JDK 8
-        uses: actions/setup-java@v3 
+        uses: actions/setup-java@v3
         with:
           java-version: '8'
-          distribution: 'temurin'
 
       - name: Cache Maven packages
-        uses: actions/cache@v3 
+        uses: actions/cache@v3
         with:
           path: ~/.m2
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -28,15 +27,15 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Build with Maven
-        run: ./mvnw package
+        run: ./mvnw install
 
-      - name: Log in to Docker Hub
+      - name: Docker login
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build Docker image
+      - name: Build and tag Docker image
         run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/intens-api:latest .
 
       - name: Push Docker image
